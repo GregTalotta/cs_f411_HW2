@@ -7,6 +7,7 @@
 #ifndef FILE_BUILD_H_INCLUDED
 #define FILE_BUILD_H_INCLUDED
 #include <vector>
+#include <algorithm>
 using std::vector;
 using Bridge = vector<int>;
 

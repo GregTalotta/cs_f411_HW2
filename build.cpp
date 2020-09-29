@@ -47,12 +47,16 @@ void build_count(const vector<Bridge> bridges, int index, vector<Bridge> bridge_
                 indecies.push_back(i);
             }
         }
-        for (int i = 0; i < indecies.size(); ++i)
+        vector<Bridge> new_bridge_set;
+        for (int i = 0; i < bridge_set.size(); ++i)
         {
-            bridge_set.erase(bridge_set.begin() + indecies[i]);
+            if (std::find(indecies.begin(), indecies.end(), i) == indecies.end())
+            {
+                new_bridge_set.push_back(bridge_set[i]);
+            }
         }
-        bridge_set.push_back(bridges[index]);
-        build_count(bridges, (index + 1), bridge_set, add_totals);
+        new_bridge_set.push_back(bridges[index]);
+        build_count(bridges, (index + 1), new_bridge_set, add_totals);
     }
     else
     {
