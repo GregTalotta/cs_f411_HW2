@@ -7,14 +7,12 @@
 
 #include "build.h"
 
-int build(int w, int e, const vector<Bridge> &bridges) //needs to be this because this is what the test calls
+int build(int w, int e, const vector<Bridge> &bridges)
 {
     int max_toll = 0;
     vector<int> totals;
     vector<Bridge> set;
-    if (bridges.size()>0){
-        build_count(bridges, 0, set, 0, max_toll);
-    }   
+    build_count(bridges, 0, set, 0, max_toll);
     return max_toll;
 }
 
@@ -27,27 +25,21 @@ void build_count(const vector<Bridge> & bridges, int index, vector<Bridge> & bri
         }
         return;
     }
-    ++index;
-    build_count(bridges, index, bridge_set, curr_total, max_total);
-    --index;
+    build_count(bridges, index + 1, bridge_set, curr_total, max_total);
     if (!cross_set(bridges[index], bridge_set))
     {
         bridge_set.push_back(bridges[index]);
-        curr_total += bridges[index][2];
-        ++index;
-        build_count(bridges, index, bridge_set ,curr_total, max_total);
-        --index;
+        build_count(bridges, index + 1, bridge_set, (curr_total + bridges[index][2]), max_total);
         bridge_set.pop_back();
-        curr_total -= bridges[index][2];
     }
     
 }
 
 bool cross_set(Bridge test, vector<Bridge> & against)
 {
-    for (int i = 0; i < against.size(); ++i)
+    for (auto i : against)
     {
-        if (cross(test, against[i]))
+        if (cross(test, i))
         {
             return true;
         }
