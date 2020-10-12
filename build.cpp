@@ -7,62 +7,32 @@
 
 #include "build.h"
 
-int build(int w, int e, const vector<Bridge> &bridges)
+int build(int w, int e, const vector<Bridge> &bridges) //needs to be this because this is what the test calls
 {
     int max_toll = 0;
     vector<int> totals;
     vector<Bridge> set;
-    for (int i = 0; i < bridges.size(); ++i)
-    {
-        set.push_back(bridges[i]);
-        build_count(bridges, 0, set, totals);
-        for (int i = 0; i < totals.size(); ++i)
-        {
-            if (totals[i] > max_toll)
-            {
-                max_toll = totals[i];
-            }
-        }
-
-        set.clear();
-    }
+    if (bridges.size()>0){
+        // call to function
+    }   
     return max_toll;
 }
 
-void build_count(const vector<Bridge> bridges, int index, vector<Bridge> bridge_set, vector<int> &add_totals)
+void build_count(const vector<Bridge> & bridges, int index, vector<Bridge> & bridge_set, int & curr_total, int & max_total)
 {
     if (index >= (bridges.size() - 1))
     {
-        add_totals.push_back(add_toll(bridge_set));
+        // compair curr_total and max 
         return;
     }
-    if (cross_set(bridges[index], bridge_set))
+    if (!cross_set(bridges[index], bridge_set))
     {
-        build_count(bridges, (index + 1), bridge_set, add_totals);
-        vector<int> indecies;
-        for (int i = 0; i < bridge_set.size(); ++i)
-        {
-            if (cross(bridges[index], bridge_set[i]))
-            {
-                indecies.push_back(i);
-            }
-        }
-        vector<Bridge> new_bridge_set;
-        for (int i = 0; i < bridge_set.size(); ++i)
-        {
-            if (std::find(indecies.begin(), indecies.end(), i) == indecies.end())
-            {
-                new_bridge_set.push_back(bridge_set[i]);
-            }
-        }
-        new_bridge_set.push_back(bridges[index]);
-        build_count(bridges, (index + 1), new_bridge_set, add_totals);
+        // set stuff
+        // add bridge
+        // set stuff back
     }
-    else
-    {
-        bridge_set.push_back(bridges[index]);
-        build_count(bridges, (index + 1), bridge_set, add_totals);
-    }
+    
+    // skip this bridge
 }
 
 bool cross_set(Bridge test, vector<Bridge> &against)
@@ -84,14 +54,4 @@ bool cross(Bridge test, Bridge against)
         return true;
     }
     return false;
-}
-
-int add_toll(vector<Bridge> set)
-{
-    int total = 0;
-    for (int i = 0; i < set.size(); ++i)
-    {
-        total += set[i][2];
-    }
-    return total;
 }
