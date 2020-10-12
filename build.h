@@ -12,8 +12,8 @@ using std::vector;
 using Bridge = vector<int>;
 
 int build(int w, int e, const vector<Bridge> &bridges);
-void build_count(const vector<Bridge> & bridges, int index, vector<Bridge> & bridge_set, int & curr_total, int & max_total);
-bool cross_set(Bridge & test, vector<Bridge> & against);
+void build_count(const vector<Bridge> & bridges, int index, vector<Bridge> & bridge_set, int curr_total, int & max_total);
+bool cross_set(Bridge test, vector<Bridge> & against);
 bool cross(Bridge & test, Bridge & against);
 
 #endif //#ifndef FILE_BUILD_H_INCLUDED
