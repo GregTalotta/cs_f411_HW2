@@ -10,7 +10,6 @@
 int build(int w, int e, const vector<Bridge> &bridges)
 {
     int max_toll = 0;
-    vector<int> totals;
     vector<Bridge> set;
     build_count(bridges, 0, set, 0, max_toll);
     return max_toll;
