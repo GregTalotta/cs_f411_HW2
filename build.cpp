@@ -15,11 +15,12 @@ int build(int w, int e, const vector<Bridge> &bridges)
     return max_toll;
 }
 
-void build_count(const vector<Bridge> & bridges, int index, vector<Bridge> & bridge_set, int curr_total, int & max_total)
+void build_count(const vector<Bridge> &bridges, int index, vector<Bridge> &bridge_set, int curr_total, int &max_total)
 {
     if (index >= (bridges.size()))
     {
-        if(curr_total > max_total){
+        if (curr_total > max_total)
+        {
             max_total = curr_total;
         }
         return;
@@ -31,10 +32,9 @@ void build_count(const vector<Bridge> & bridges, int index, vector<Bridge> & bri
         build_count(bridges, index + 1, bridge_set, (curr_total + bridges[index][2]), max_total);
         bridge_set.pop_back();
     }
-    
 }
 
-bool cross_set(Bridge test, vector<Bridge> & against)
+bool cross_set(Bridge test, vector<Bridge> &against)
 {
     for (auto i : against)
     {
@@ -46,7 +46,7 @@ bool cross_set(Bridge test, vector<Bridge> & against)
     return false;
 }
 
-bool cross(Bridge & test, Bridge & against)
+bool cross(Bridge &test, Bridge &against)
 {
     if ((test[0] > against[0]) && (test[1] < against[1]) || (test[0] < against[0]) && (test[1] > against[1]) || (test[0] == against[0]) || (test[1] == against[1]))
     {
