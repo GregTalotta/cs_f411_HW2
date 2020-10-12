@@ -33,18 +33,10 @@ void build_count(const vector<Bridge> bridges, int index, vector<Bridge> bridge_
     if (cross_set(bridges[index], bridge_set))
     {
         build_count(bridges, (index + 1), bridge_set, add_totals);
-        vector<int> indecies;
-        for (int i = 0; i < bridge_set.size(); ++i)
-        {
-            if (cross(bridges[index], bridge_set[i]))
-            {
-                indecies.push_back(i);
-            }
-        }
         vector<Bridge> new_bridge_set;
         for (int i = 0; i < bridge_set.size(); ++i)
         {
-            if (std::find(indecies.begin(), indecies.end(), i) == indecies.end())
+            if (!cross(bridges[index], bridge_set[i]))
             {
                 new_bridge_set.push_back(bridge_set[i]);
             }
